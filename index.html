@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEX GYM - Fitness Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body class="flex h-screen bg-image dark-mode gradient-bg">
+    <div class="flex h-screen w-full bg-black bg-opacity-75">
+        <!-- Sidebar -->
+        <aside class="bg-industrial w-64 h-full flex flex-col">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold flex items-center">
+                    <img src="https://www.cleanpng.com/png-t-shirt-fitness-centre-bodybuilding-personal-train-693228/" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
+                    FLEX GYM
+                </h1>
+            </div>
+            <nav class="flex-1 overflow-y-auto">
+                <a href="index.html" class="sidebar-link flex items-center px-4 py-3 active">
+                    <i data-feather="home" class="mr-3"></i> Dashboard
+                </a>
+                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
+                </a>
+                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="coffee" class="mr-3"></i> Nutrition
+                </a>
+                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
+                </a>
+                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="users" class="mr-3"></i> Classes
+                </a>
+                <a href="community.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="message-square" class="mr-3"></i> Community
+                </a>
+            </nav>
+            <div class="p-4">
+                <button id="theme-toggle" class="btn-primary px-4 py-2 rounded-full flex items-center neon-glow">
+                    <i data-feather="moon" class="mr-2"></i> Toggle Theme
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <header class="bg-industrial p-4 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold">Dashboard</h2>
+                <div class="flex items-center">
+                    <button class="mr-4 hover:text-accent" onclick="alert('Notifications coming soon!')"><i data-feather="bell"></i></button>
+                    <button class="hover:text-accent" onclick="alert('Settings coming soon!')"><i data-feather="settings"></i></button>
+                </div>
+            </header>
+
+            <!-- Hero Section with Parallax -->
+            <section class="hero-section parallax">
+                <div class="container mx-auto p-6 text-center text-white relative z-10">
+                    <h1 class="text-4xl font-bold mb-4">Welcome to FLEX GYM</h1>
+                    <p class="text-lg mb-6">Transform Your Body, Transform Your Life</p>
+                    <a href="classes.html" class="btn-primary px-6 py-3 rounded-full text-lg animate-pulse neon-glow">Join a Class</a>
+                </div>
+            </section>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4">Welcome back, John!</h3>
+                    <p class="text-gray-400 mb-2">Here's your fitness summary for this week</p>
+                    <p class="text-gray-400">Membership: <span id="membership-status">Basic</span></p>
+                </div>
+
+                <!-- Interactive Gym Map -->
+                <div class="card p-6 rounded-lg mb-8 neon-glow">
+                    <h3 class="text-xl font-semibold mb-4">Explore FLEX GYM</h3>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48" alt="Gym Map" class="w-full h-48 object-cover rounded-lg">
+                        <a href="workout-plan.html" class="absolute top-10 left-10 bg-accent p-2 rounded-full text-sm neon-glow">Workout Zone</a>
+                        <a href="classes.html" class="absolute bottom-10 right-10 bg-accent p-2 rounded-full text-sm neon-glow">Class Area</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="stats">
+                    <div class="stat-card p-6 rounded-lg flex items-center neon-glow">
+                        <div class="rounded-full bg-yellow-500 p-3 mr-4">
+                            <i data-feather="activity" class="text-gray-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Workouts</h3>
+                            <p class="text-3xl font-bold" id="workouts-count">24</p>
+                        </div>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg flex items-center neon-glow">
+                        <div class="rounded-full bg-green-500 p-3 mr-4">
+                            <i data-feather="zap" class="text-gray-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Calories</h3>
+                            <p class="text-3xl font-bold" id="calories-count">3,500</p>
+                        </div>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg flex items-center neon-glow">
+                        <div class="rounded-full bg-blue-500 p-3 mr-4">
+                            <i data-feather="users" class="text-gray-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Classes</h3>
+                            <p class="text-3xl font-bold" id="classes-count">8</p>
+                        </div>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg flex items-center neon-glow">
+                        <div class="rounded-full bg-purple-500 p-3 mr-4">
+                            <i data-feather="award" class="text-gray-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">Records</h3>
+                            <p class="text-3xl font-bold" id="records-count">5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="mt-8 card p-6 rounded-lg neon-glow">
+                    <h3 class="text-xl font-semibold mb-4">Your Achievements</h3>
+                    <div id="achievements" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+                </div>
+
+                <!-- Chatbot -->
+                <div class="fixed bottom-4 right-4">
+                    <button id="chatbot-toggle" class="btn-primary p-4 rounded-full neon-glow" onclick="toggleChatbot()">
+                        <i data-feather="message-circle"></i>
+                    </button>
+                    <div id="chatbot" class="hidden card p-4 mt-2 w-80 h-96 overflow-y-auto neon-glow">
+                        <h4 class="text-xl font-semibold mb-2">Virtual Trainer</h4>
+                        <div id="chatbot-messages" class="space-y-2"></div>
+                        <input id="chatbot-input" type="text" class="w-full p-2 mt-2 rounded bg-gray-700 text-white" placeholder="Ask me anything..." onkeypress="if(event.key === 'Enter') sendChatbotMessage()">
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold mb-4">Featured Classes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card overflow-hidden rounded-lg neon-glow">
+                            <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77" alt="Strength Training" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-2">Strength Training</h4>
+                                <p class="text-sm text-gray-400 mb-4">Build muscle and strength</p>
+                                <a href="strength-training.html" class="btn-primary px-4 py-2 rounded-full text-sm w-full inline-block text-center neon-glow">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="card overflow-hidden rounded-lg neon-glow">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b" alt="Yoga Flow" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-2">Yoga Flow</h4>
+                                <p class="text-sm text-gray-400 mb-4">Enhance flexibility and peace</p>
+                                <a href="classes.html" class="btn-primary px-4 py-2 rounded-full text-sm w-full inline-block text-center neon-glow">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="card overflow-hidden rounded-lg neon-glow">
+                            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438" alt="HIIT Cardio" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h4 class="font-semibold mb-2">HIIT Cardio</h4>
+                                <p class="text-sm text-gray-400 mb-4">Burn fat effectively</p>
+                                <a href="classes.html" class="btn-primary px-4 py-2 rounded-full text-sm w-full inline-block text-center neon-glow">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="bg-industrial mt-12 py-8 px-6">
+                <div class="max-w-7xl mx-auto text-center text-gray-400">
+                    <p>© 2025 FLEX GYM. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+    <script>feather.replace();</script>
+</body>
+</html>

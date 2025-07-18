@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #333);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px cyan;
+        }
+        .progress-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress {
+            height: 20px;
+            width: 50%;
+            background: cyan;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+            box-shadow: 0 0 10px cyan;
+        }
+        .goal-input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            background: cyan;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            color: black;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #00bbbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Progress Tracker</h1>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <p><span id="progress-percent">50</span>% Completed</p>
+        <input type="number" class="goal-input" id="goal" placeholder="Set Goal (0-100)" min="0" max="100">
+        <div class="buttons">
+            <button onclick="updateProgress()">Update</button>
+            <button onclick="resetProgress()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            let goal = document.getElementById("goal").value;
+            if (goal >= 0 && goal <= 100) {
+                document.getElementById("progress").style.width = goal + "%";
+                document.getElementById("progress-percent").innerText = goal;
+            } else {
+                alert("Please enter a valid percentage between 0 and 100.");
+            }
+        }
+
+        function resetProgress() {
+            document.getElementById("progress").style.width = "0%";
+            document.getElementById("progress-percent").innerText = "0";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEX GYM - Nutrition</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body class="flex h-screen bg-image dark-mode">
+    <div class="flex h-screen w-full bg-black bg-opacity-75">
+        <!-- Sidebar -->
+        <aside class="bg-industrial w-64 h-full flex flex-col">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold flex items-center">
+                    <img src="assets/images/gym-logo.png" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
+                    FLEX GYM
+                </h1>
+            </div>
+            <nav class="flex-1 overflow-y-auto">
+                <a href="index.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="home" class="mr-3"></i> Dashboard
+                </a>
+                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
+                </a>
+                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3 active">
+                    <i data-feather="coffee" class="mr-3"></i> Nutrition
+                </a>
+                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
+                </a>
+                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="users" class="mr-3"></i> Classes
+                </a>
+                <a href="community.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="message-square" class="mr-3"></i> Community
+                </a>
+            </nav>
+            <div class="p-4">
+                <button id="theme-toggle" class="btn-primary px-4 py-2 rounded-full flex items-center neon-glow">
+                    <i data-feather="moon" class="mr-2"></i> Toggle Theme
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <header class="bg-industrial p-4 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold">Nutrition</h2>
+                <button class="btn-primary px-4 py-2 rounded-full neon-glow" onclick="showMealForm()">Log Meal</button>
+            </header>
+
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="card p-6 rounded-lg neon-glow">
+                        <h3 class="text-xl font-semibold mb-4">Daily Macros</h3>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <p class="text-sm text-gray-400">Calories</p>
+                                <p class="text-2xl font-bold" id="calories-display">0 / 3,000</p>
+                            </div>
+                            <div class="w-1/2 bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-accent h-2.5 rounded-full" id="calories-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-6 rounded-lg neon-glow">
+                        <h3 class="text-xl font-semibold mb-4">Water Intake</h3>
+                        <div class="flex items-center mb-4">
+                            <i data-feather="droplet" class="text-accent mr-2"></i>
+                            <p class="text-2xl font-bold" id="water-display">0L / 3L</p>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5 mb-4">
+                            <div class="bg-blue-500 h-2.5 rounded-full" id="water-bar" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-primary px-4 py-2 rounded-full neon-glow" onclick="addWater()">Add 0.5L</button>
+                    </div>
+                </div>
+
+                <!-- Personalized Nutrition Plan -->
+                <div class="card p-6 rounded-lg mb-6 neon-glow">
+                    <h3 class="text-xl font-semibold mb-4">Your Nutrition Plan</h3>
+                    <div id="nutrition-plan" class="space-y-2"></div>
+                    <button class="btn-primary px-4 py-2 rounded-full mt-4 neon-glow" onclick="generateNutritionPlan()">Generate Plan</button>
+                </div>
+
+                <!-- Meal Log Form (Hidden by default) -->
+                <div class="card p-6 rounded-lg hidden neon-glow" id="meal-form">
+                    <h4 class="text-xl font-semibold mb-4">Log a Meal</h4>
+                    <form onsubmit="logMeal(event)">
+                        <div class="mb-4">
+                            <label class="block text-gray-400">Meal Name</label>
+                            <input type="text" id="meal-name" class="w-full p-2 rounded bg-gray-700 text-white" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-400">Calories</label>
+                            <input type="number" id="meal-calories" class="w-full p-2 rounded bg-gray-700 text-white" required>
+                        </div>
+                        <button type="submit" class="btn-primary px-6 py-3 rounded-full neon-glow">Submit</button>
+                        <button type="button" class="btn-primary px-6 py-3 rounded-full ml-2 neon-glow" onclick="hideMealForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+    <script>feather.replace();</script>
+</body>
+</html>

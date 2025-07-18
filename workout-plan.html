@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEX GYM - Workout Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body class="flex h-screen bg-image dark-mode gradient-bg">
+    <div class="flex h-screen w-full bg-black bg-opacity-75">
+        <!-- Sidebar -->
+        <aside class="bg-industrial w-64 h-full flex flex-col">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold flex items-center">
+                    <img src="assets/images/gym-logo.png" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
+                    FLEX GYM
+                </h1>
+            </div>
+            <nav class="flex-1 overflow-y-auto">
+                <a href="index.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="home" class="mr-3"></i> Dashboard
+                </a>
+                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3 active">
+                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
+                </a>
+                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="coffee" class="mr-3"></i> Nutrition
+                </a>
+                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
+                </a>
+                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="users" class="mr-3"></i> Classes
+                </a>
+                <a href="community.html" class="sidebar-link flex items-center px-4 py-3">
+                    <i data-feather="message-square" class="mr-3"></i> Community
+                </a>
+            </nav>
+            <div class="p-4">
+                <button id="theme-toggle" class="btn-primary px-4 py-2 rounded-full flex items-center neon-glow">
+                    <i data-feather="moon" class="mr-2"></i> Toggle Theme
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <header class="bg-industrial p-4 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold">Workout Plan</h2>
+                <a href="index.html" class="btn-primary px-4 py-2 rounded-full text-sm neon-glow">Back to Dashboard</a>
+            </header>
+
+            <div class="p-6">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4">Full Body Blast</h3>
+                    <video controls class="w-full h-64 rounded-lg mb-4 neon-glow">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="text-gray-400 mb-4">A high-intensity workout targeting all major muscle groups.</p>
+                </div>
+
+                <!-- AI Workout Suggestion -->
+                <div class="card p-6 rounded-lg mb-8 neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">AI Workout Suggestion</h4>
+                    <p id="ai-suggestion" class="text-gray-400"></p>
+                </div>
+
+                <!-- 3D Flip Card for Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="card flip-card neon-glow">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front p-6">
+                                <h4 class="text-xl font-semibold mb-4">Workout Details</h4>
+                                <p class="text-gray-400">Click to flip</p>
+                            </div>
+                            <div class="flip-card-back p-6">
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i data-feather="clock" class="mr-2 text-accent"></i> Duration: 60 minutes</li>
+                                    <li class="flex items-center"><i data-feather="zap" class="mr-2 text-accent"></i> Intensity: High</li>
+                                    <li class="flex items-center"><i data-feather="target" class="mr-2 text-accent"></i> Target: Full Body</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card flip-card neon-glow">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front p-6">
+                                <h4 class="text-xl font-semibold mb-4">Equipment Needed</h4>
+                                <p class="text-gray-400">Click to flip</p>
+                            </div>
+                            <div class="flip-card-back p-6">
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i data-feather="check" class="mr-2 text-accent"></i> Dumbbells</li>
+                                    <li class="flex items-center"><i data-feather="check" class="mr-2 text-accent"></i> Resistance Bands</li>
+                                    <li class="flex items-center"><i data-feather="check" class="mr-2 text-accent"></i> Exercise Mat</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gym Equipment Booking -->
+                <div class="card p-6 rounded-lg mb-8 neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">Equipment Booking</h4>
+                    <div id="equipment-booking" class="space-y-4"></div>
+                </div>
+
+                <!-- Real-Time Workout Tracking -->
+                <div class="mt-8 card p-6 rounded-lg neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">Live Workout Tracker</h4>
+                    <p class="text-lg mb-2">Reps: <span id="rep-count">0</span></p>
+                    <p class="text-lg mb-4">Est. Calories Burned: <span id="calorie-burn">0</span></p>
+                    <button class="btn-primary px-4 py-2 rounded-full mr-2 neon-glow" onclick="addRep()">Add Rep</button>
+                    <button class="btn-primary px-4 py-2 rounded-full neon-glow" onclick="resetTracker()">Reset</button>
+                </div>
+
+                <!-- Workout Intensity Analyzer -->
+                <div class="mt-8 card p-6 rounded-lg neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">Intensity Analyzer</h4>
+                    <p id="intensity-feedback" class="text-gray-400">Start your workout to analyze intensity.</p>
+                </div>
+
+                <!-- Workout Timer -->
+                <div class="mt-8 card p-6 rounded-lg neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">Workout Timer</h4>
+                    <p class="text-3xl font-bold mb-4" id="timer-display">00:00</p>
+                    <button class="btn-primary px-6 py-3 rounded-full mr-2 neon-glow" onclick="startTimer(3600)">Start (60 min)</button>
+                    <button class="btn-primary px-6 py-3 rounded-full neon-glow" onclick="stopTimer()">Stop</button>
+                </div>
+
+                <!-- Music Player -->
+                <div class="mt-8 card p-6 rounded-lg neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">Workout Beats</h4>
+                    <audio id="music-player" controls class="w-full">
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+                        Your browser does not support the audio tag.
+                    </audio>
+                </div>
+
+                <!-- Workout Actions -->
+                <div class="mt-8">
+                    <button class="btn-primary px-6 py-3 rounded-full mr-2 animate-bounce neon-glow" onclick="completeWorkout()">Complete Workout</button>
+                </div>
+
+                <!-- Workout Log History -->
+                <div class="mt-8 card p-6 rounded-lg neon-glow">
+                    <h4 class="text-xl font-semibold mb-4">Workout History</h4>
+                    <div id="workout-history" class="space-y-2"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+    <script>feather.replace();</script>
+</body>
+</html>
