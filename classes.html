@@ -1,110 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEX GYM - Classes">
     <title>FLEX GYM - Classes</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body class="flex h-screen bg-image dark-mode gradient-bg">
-    <div class="flex h-screen w-full bg-black bg-opacity-75">
-        <!-- Sidebar -->
-        <aside class="bg-industrial w-64 h-full flex flex-col">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold flex items-center">
-                    <img src="assets/images/gym-logo.png" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
-                    FLEX GYM
-                </h1>
-            </div>
-            <nav class="flex-1 overflow-y-auto">
-                <a href="index.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="home" class="mr-3"></i> Dashboard
-                </a>
-                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
-                </a>
-                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="coffee" class="mr-3"></i> Nutrition
-                </a>
-                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
-                </a>
-                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3 active">
-                    <i data-feather="users" class="mr-3"></i> Classes
-                </a>
-                <a href="community.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="message-square" class="mr-3"></i> Community
-                </a>
-            </nav>
-            <div class="p-4">
-                <button id="theme-toggle" class="btn-primary px-4 py-2 rounded-full flex items-center neon-glow">
-                    <i data-feather="moon" class="mr-2"></i> Toggle Theme
+
+<body class="dark-mode">
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+    <div style="display:flex;height:100vh;overflow:hidden;background:var(--bg-primary)">
+
+        <aside class="bg-industrial flex flex-col" id="sidebar"
+            style="width:256px;flex-shrink:0;height:100vh;position:relative;z-index:10">
+            <div
+                style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+                <span class="logo-text">FLEX GYM</span>
+                <button id="sidebar-close-btn" onclick="closeSidebar()"
+                    style="display:none;background:none;border:none;cursor:pointer;color:var(--text-secondary);padding:0.25rem;align-items:center;justify-content:center">
+                    <i data-feather="x" style="width:18px;height:18px"></i>
                 </button>
+            </div>
+            <nav style="flex:1;overflow-y:auto;padding:0.5rem 0">
+                <a href="index.html" class="sidebar-link"><i data-feather="home"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Dashboard</span></a>
+                <a href="workout-plan.html" class="sidebar-link"><i data-feather="zap"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Workout Plan</span></a>
+                <a href="nutrition.html" class="sidebar-link"><i data-feather="target"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Nutrition</span></a>
+                <a href="progress-tracker.html" class="sidebar-link"><i data-feather="trending-up"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Progress</span></a>
+                <a href="classes.html" class="sidebar-link active"><i data-feather="users"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Classes</span></a>
+                <a href="community.html" class="sidebar-link"><i data-feather="message-square"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Community</span></a>
+                <div style="height:1px;background:var(--border);margin:0.5rem 1rem"></div>
+                <a href="trainers.html" class="sidebar-link"><i data-feather="user"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Trainers</span></a>
+                <a href="pricing.html" class="sidebar-link"><i data-feather="tag"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Pricing</span></a>
+                <a href="contact.html" class="sidebar-link"><i data-feather="mail"
+                        style="width:18px;height:18px;flex-shrink:0"></i><span>Contact</span></a>
+            </nav>
+            <div style="padding:1rem 1.25rem;border-top:1px solid var(--border)">
+                <div style="display:flex;align-items:center;gap:0.75rem">
+                    <div
+                        style="width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <i data-feather="user" style="width:16px;height:16px;color:var(--accent)"></i>
+                    </div>
+                    <div style="min-width:0">
+                        <p style="font-size:0.875rem;font-weight:600;margin:0">John Doe</p>
+                        <p style="font-size:0.75rem;color:var(--text-secondary);margin:0" id="sidebar-plan">Basic Member
+                        </p>
+                    </div>
+                </div>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
-            <header class="bg-industrial p-4 flex justify-between items-center">
-                <h2 class="text-2xl font-semibold">Classes</h2>
-                <a href="index.html" class="btn-primary px-4 py-2 rounded-full text-sm neon-glow">Back to Dashboard</a>
+            <header class="page-header">
+                <div style="display:flex;align-items:center;gap:0.75rem">
+                    <button class="mobile-menu-btn" onclick="openSidebar()">
+                        <i data-feather="menu" style="width:20px;height:20px"></i>
+                    </button>
+                    <div>
+                        <h2 style="font-size:1.125rem;font-weight:700;margin:0;line-height:1.2">Classes</h2>
+                        <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">Book sessions &amp; track your
+                            attendance</p>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem">
+                    <button onclick="toggleTheme()" id="theme-toggle" title="Toggle Theme"
+                        style="background:none;border:1px solid var(--border);border-radius:8px;padding:0.5rem;cursor:pointer;color:var(--text-primary);display:flex;align-items:center;justify-content:center;transition:all 0.22s ease">
+                        <i data-feather="moon" id="theme-icon" style="width:18px;height:18px"></i>
+                    </button>
+                </div>
             </header>
 
-            <div class="p-6">
-                <!-- Live Class Schedule -->
-                <div class="card p-6 rounded-lg mb-8 neon-glow">
-                    <h3 class="text-xl font-semibold mb-4">Live Class Schedule</h3>
-                    <div id="class-schedule" class="space-y-4"></div>
-                </div>
+            <div style="padding:1.5rem">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                <!-- Trainer Session Scheduler -->
-                <div class="card p-6 rounded-lg mb-8 neon-glow">
-                    <h3 class="text-xl font-semibold mb-4">Book a Trainer Session</h3>
-                    <div id="trainer-schedule" class="space-y-4"></div>
-                </div>
+                    <!-- Left: Schedule + Trainers + Leaderboard -->
+                    <div class="lg:col-span-2" style="display:flex;flex-direction:column;gap:1.25rem">
 
-                <!-- Class Leaderboard -->
-                <div class="card p-6 rounded-lg mb-8 neon-glow">
-                    <h3 class="text-xl font-semibold mb-4">Class Leaderboard</h3>
-                    <div id="class-leaderboard" class="space-y-2"></div>
-                </div>
+                        <!-- Live Schedule -->
+                        <div class="card p-5">
+                            <h3 class="section-title">Live Class Schedule</h3>
+                            <div id="class-schedule"></div>
+                        </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="classes-list">
-                    <div class="card overflow-hidden rounded-lg neon-glow">
-                        <video controls class="w-full h-48">
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="p-4">
-                            <h4 class="font-semibold mb-2">Strength Training</h4>
-                            <p class="text-sm text-gray-400 mb-4">Build muscle and strength</p>
-                            <a href="strength-training.html" class="btn-primary px-4 py-2 rounded-full text-sm w-full inline-block text-center neon-glow">Join Now</a>
+                        <!-- Trainer Sessions -->
+                        <div class="card p-5">
+                            <h3 class="section-title">Book a Trainer Session</h3>
+                            <div id="trainer-schedule"></div>
+                        </div>
+
+                        <!-- Class Cards -->
+                        <div>
+                            <h3 class="section-title">Available Classes</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="card" style="overflow:hidden;margin-bottom:0">
+                                    <div style="overflow:hidden">
+                                        <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=400&q=80"
+                                            alt="Strength Training" class="class-card-img">
+                                    </div>
+                                    <div style="padding:1rem">
+                                        <div
+                                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+                                            <span class="badge badge-accent">60 min</span>
+                                            <span style="font-size:0.75rem;color:var(--text-secondary)">High</span>
+                                        </div>
+                                        <h4 style="font-size:0.9rem;font-weight:700;margin:0 0 0.25rem">Strength
+                                            Training</h4>
+                                        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0 0 0.875rem">
+                                            Build muscle &amp; raw strength</p>
+                                        <a href="strength-training.html" class="btn-primary"
+                                            style="border-radius:8px;font-size:0.8rem;width:100%;padding:0.5rem;justify-content:center;display:flex">Book
+                                            Now</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="overflow:hidden;margin-bottom:0">
+                                    <div style="overflow:hidden">
+                                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80"
+                                            alt="Yoga Flow" class="class-card-img">
+                                    </div>
+                                    <div style="padding:1rem">
+                                        <div
+                                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+                                            <span class="badge badge-success">45 min</span>
+                                            <span style="font-size:0.75rem;color:var(--text-secondary)">Low</span>
+                                        </div>
+                                        <h4 style="font-size:0.9rem;font-weight:700;margin:0 0 0.25rem">Yoga Flow</h4>
+                                        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0 0 0.875rem">
+                                            Flexibility &amp; mindfulness</p>
+                                        <button onclick="bookClass('Yoga Flow')" class="btn-primary"
+                                            style="border-radius:8px;font-size:0.8rem;width:100%;padding:0.5rem">Book
+                                            Now</button>
+                                    </div>
+                                </div>
+                                <div class="card" style="overflow:hidden;margin-bottom:0">
+                                    <div style="overflow:hidden">
+                                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80"
+                                            alt="HIIT Cardio" class="class-card-img">
+                                    </div>
+                                    <div style="padding:1rem">
+                                        <div
+                                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+                                            <span class="badge badge-danger">30 min</span>
+                                            <span style="font-size:0.75rem;color:var(--text-secondary)">Very High</span>
+                                        </div>
+                                        <h4 style="font-size:0.9rem;font-weight:700;margin:0 0 0.25rem">HIIT Cardio</h4>
+                                        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0 0 0.875rem">Max
+                                            calorie burn</p>
+                                        <button onclick="bookClass('HIIT Cardio')" class="btn-primary"
+                                            style="border-radius:8px;font-size:0.8rem;width:100%;padding:0.5rem">Book
+                                            Now</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card overflow-hidden rounded-lg neon-glow">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b" alt="Yoga Flow" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h4 class="font-semibold mb-2">Yoga Flow</h4>
-                            <p class="text-sm text-gray-400 mb-4">Enhance flexibility</p>
-                            <button class="btn-primary px-4 py-2 rounded-full text-sm w-full neon-glow" onclick="bookClass('Yoga Flow')">Join Now</button>
-                        </div>
-                    </div>
-                    <div class="card overflow-hidden rounded-lg neon-glow">
-                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438" alt="HIIT Cardio" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h4 class="font-semibold mb-2">HIIT Cardio</h4>
-                            <p class="text-sm text-gray-400 mb-4">Burn fat effectively</p>
-                            <button class="btn-primary px-4 py-2 rounded-full text-sm w-full neon-glow" onclick="bookClass('HIIT Cardio')">Join Now</button>
+
+                    <!-- Right: Leaderboard -->
+                    <div>
+                        <div class="card p-5">
+                            <h3 class="section-title">Class Leaderboard</h3>
+                            <div id="class-leaderboard"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <footer class="page-footer">
+                <p style="margin:0">&copy; 2025 FLEX GYM. Built for Champions.</p>
+            </footer>
         </main>
+    </div>
+
+    <div id="toast-container"></div>
+    <div id="chatbot-widget">
+        <div id="chatbot-panel" class="hidden">
+            <div class="chat-header">
+                <div
+                    style="width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                    <i data-feather="cpu" style="width:15px;height:15px;color:var(--accent)"></i>
+                </div>
+                <div>
+                    <p style="font-size:0.875rem;font-weight:600;margin:0;color:var(--text-primary)">Virtual Trainer</p>
+                    <p style="font-size:0.7rem;color:#22c55e;margin:0">&#9679; Online</p>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatbot-messages"></div>
+            <div class="chat-input-area">
+                <input id="chatbot-input" type="text" placeholder="Ask about classes..."
+                    onkeypress="if(event.key==='Enter')sendChatbotMessage()">
+                <button class="chat-send-btn" onclick="sendChatbotMessage()">
+                    <i data-feather="send" style="width:15px;height:15px"></i>
+                </button>
+            </div>
+        </div>
+        <button id="chatbot-toggle-btn" onclick="toggleChatbot()">
+            <i data-feather="message-circle" style="width:22px;height:22px"></i>
+        </button>
     </div>
     <script src="scripts.js"></script>
     <script>feather.replace();</script>
 </body>
+
 </html>

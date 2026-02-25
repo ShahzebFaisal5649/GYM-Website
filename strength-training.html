@@ -1,70 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLEX GYM - Strength Training</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLEX GYM - Strength Training</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body class="flex h-screen bg-image">
-    <div class="flex h-screen w-full bg-black bg-opacity-75">
-        <!-- Sidebar -->
-        <aside class="bg-industrial w-64 h-full flex flex-col">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold flex items-center">
-                    <img src="assets/images/gym-logo.png" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
-                    FLEX GYM
-                </h1>
-            </div>
-            <nav class="flex-1 overflow-y-auto">
-                <a href="index.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="home" class="mr-3"></i> Dashboard
-                </a>
-                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
-                </a>
-                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="coffee" class="mr-3"></i> Nutrition
-                </a>
-                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
-                </a>
-                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3 active">
-                    <i data-feather="users" class="mr-3"></i> Classes
-                </a>
-                <a href="community.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="message-square" class="mr-3"></i> Community
-                </a>
-            </nav>
-            <div class="p-4">
-                <a href="#" class="flex items-center text-sm">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="User Avatar" class="w-8 h-8 rounded-full mr-2">
-                    <span>John Doe</span>
-                </a>
-            </div>
-        </aside>
+<body class="dark-mode">
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div style="display:flex;height:100vh;overflow:hidden;background:var(--bg-primary)">
 
-        <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto">
-            <header class="bg-industrial p-4 flex justify-between items-center">
-                <h2 class="text-2xl font-semibold">Strength Training</h2>
-                <a href="classes.html" class="btn-primary px-4 py-2 rounded-full text-sm">Back to Classes</a>
-            </header>
-
-            <div class="p-6">
-                <div class="mb-8">
-                    <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77" alt="Strength Training" class="w-full h-64 object-cover rounded-lg mb-4">
-                    <h3 class="text-2xl font-bold mb-4">Strength Training Class</h3>
-                    <p class="text-gray-400 mb-4">Build muscle and increase strength with guided exercises.</p>
-                </div>
-                <button class="btn-primary px-8 py-3 rounded-full text-lg" onclick="bookClass('Strength Training')">Book This Class</button>
-            </div>
-        </main>
+<aside class="bg-industrial flex flex-col" id="sidebar" style="width:256px;flex-shrink:0;height:100vh;position:relative;z-index:10">
+  <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+    <span class="logo-text">FLEX GYM</span>
+    <button id="sidebar-close-btn" onclick="closeSidebar()" style="display:none;background:none;border:none;cursor:pointer;color:var(--text-secondary);padding:0.25rem;align-items:center;justify-content:center">
+      <i data-feather="x" style="width:18px;height:18px"></i>
+    </button>
+  </div>
+  <nav style="flex:1;overflow-y:auto;padding:0.5rem 0">
+    <a href="index.html" class="sidebar-link"><i data-feather="home" style="width:18px;height:18px;flex-shrink:0"></i><span>Dashboard</span></a>
+    <a href="workout-plan.html" class="sidebar-link"><i data-feather="zap" style="width:18px;height:18px;flex-shrink:0"></i><span>Workout Plan</span></a>
+    <a href="nutrition.html" class="sidebar-link"><i data-feather="target" style="width:18px;height:18px;flex-shrink:0"></i><span>Nutrition</span></a>
+    <a href="progress-tracker.html" class="sidebar-link"><i data-feather="trending-up" style="width:18px;height:18px;flex-shrink:0"></i><span>Progress</span></a>
+    <a href="classes.html" class="sidebar-link active"><i data-feather="users" style="width:18px;height:18px;flex-shrink:0"></i><span>Classes</span></a>
+    <a href="community.html" class="sidebar-link"><i data-feather="message-square" style="width:18px;height:18px;flex-shrink:0"></i><span>Community</span></a>
+    <div style="height:1px;background:var(--border);margin:0.5rem 1rem"></div>
+    <a href="trainers.html" class="sidebar-link"><i data-feather="user" style="width:18px;height:18px;flex-shrink:0"></i><span>Trainers</span></a>
+    <a href="pricing.html" class="sidebar-link"><i data-feather="tag" style="width:18px;height:18px;flex-shrink:0"></i><span>Pricing</span></a>
+    <a href="contact.html" class="sidebar-link"><i data-feather="mail" style="width:18px;height:18px;flex-shrink:0"></i><span>Contact</span></a>
+  </nav>
+  <div style="padding:1rem 1.25rem;border-top:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i data-feather="user" style="width:16px;height:16px;color:var(--accent)"></i>
+      </div>
+      <div style="min-width:0">
+        <p style="font-size:0.875rem;font-weight:600;margin:0">John Doe</p>
+        <p style="font-size:0.75rem;color:var(--text-secondary);margin:0" id="sidebar-plan">Basic Member</p>
+      </div>
     </div>
-    <script src="scripts.js"></script>
-    <script>feather.replace();</script>
+  </div>
+</aside>
+
+<main class="flex-1 overflow-y-auto">
+  <header class="page-header">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <button class="mobile-menu-btn" onclick="openSidebar()"><i data-feather="menu" style="width:20px;height:20px"></i></button>
+      <div>
+        <h2 style="font-size:1.125rem;font-weight:700;margin:0;line-height:1.2">Strength Training</h2>
+        <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">Build muscle, increase power, transform your body</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <a href="classes.html" class="btn-outline" style="padding:0.45rem 1rem;font-size:0.8rem;border-radius:8px">
+        <i data-feather="arrow-left" style="width:14px;height:14px"></i> Back
+      </a>
+      <button onclick="toggleTheme()" id="theme-toggle" style="background:none;border:1px solid var(--border);border-radius:8px;padding:0.5rem;cursor:pointer;color:var(--text-primary);display:flex;align-items:center;transition:all 0.22s ease">
+        <i data-feather="moon" id="theme-icon" style="width:18px;height:18px"></i>
+      </button>
+    </div>
+  </header>
+
+  <div style="padding:1.5rem">
+
+    <!-- Hero Banner -->
+    <div class="card" style="overflow:hidden;margin-bottom:1.75rem">
+      <div style="position:relative;height:280px">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80" alt="Strength Training" style="width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(11,11,15,0.92) 40%,rgba(11,11,15,0.3))"></div>
+        <div style="position:absolute;inset:0;padding:2rem;display:flex;flex-direction:column;justify-content:center">
+          <span class="badge badge-accent" style="margin-bottom:0.875rem;display:inline-flex;align-self:flex-start">Featured Class</span>
+          <h2 style="font-size:2rem;font-weight:800;margin:0 0 0.5rem;max-width:480px">Strength &amp; Conditioning</h2>
+          <p style="color:var(--text-secondary);margin:0 0 1.25rem;max-width:460px">Expert-guided strength training designed to maximize muscle growth, improve functional fitness, and build the body you've always wanted.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--text-secondary)">
+              <i data-feather="clock" style="width:14px;height:14px;color:var(--accent)"></i> 60 min
+            </div>
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--text-secondary)">
+              <i data-feather="users" style="width:14px;height:14px;color:var(--accent)"></i> Max 15 members
+            </div>
+            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--text-secondary)">
+              <i data-feather="bar-chart-2" style="width:14px;height:14px;color:var(--accent)"></i> All levels
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Exercises -->
+      <div class="lg:col-span-2" style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- Overview -->
+        <div class="card p-5">
+          <h3 class="section-title">Class Overview</h3>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;margin:0">
+            Our Strength &amp; Conditioning class is a structured, science-backed program that combines compound lifts, functional movements, and progressive overload principles. Whether you're brand new to strength training or a seasoned lifter, our certified coaches will guide you every step of the way — ensuring proper form, preventing injury, and maximizing results.
+          </p>
+        </div>
+
+        <!-- Exercise List -->
+        <div class="card p-5">
+          <h3 class="section-title">Today's Exercises</h3>
+          <div style="display:flex;flex-direction:column;gap:0.875rem">
+
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border)">
+              <div style="width:42px;height:42px;border-radius:10px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:800;color:var(--accent)">1</div>
+              <div style="flex:1">
+                <p style="font-size:0.9rem;font-weight:600;margin:0 0 0.2rem">Back Squat</p>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">4 sets × 8 reps &nbsp;·&nbsp; Quads, Glutes, Hamstrings</p>
+              </div>
+              <span class="badge badge-accent">Compound</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border)">
+              <div style="width:42px;height:42px;border-radius:10px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:800;color:var(--accent)">2</div>
+              <div style="flex:1">
+                <p style="font-size:0.9rem;font-weight:600;margin:0 0 0.2rem">Deadlift</p>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">3 sets × 6 reps &nbsp;·&nbsp; Full Posterior Chain</p>
+              </div>
+              <span class="badge badge-accent">Compound</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border)">
+              <div style="width:42px;height:42px;border-radius:10px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:800;color:var(--success)">3</div>
+              <div style="flex:1">
+                <p style="font-size:0.9rem;font-weight:600;margin:0 0 0.2rem">Bench Press</p>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">4 sets × 10 reps &nbsp;·&nbsp; Chest, Triceps, Delts</p>
+              </div>
+              <span class="badge badge-success">Upper</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border)">
+              <div style="width:42px;height:42px;border-radius:10px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:800;color:var(--success)">4</div>
+              <div style="flex:1">
+                <p style="font-size:0.9rem;font-weight:600;margin:0 0 0.2rem">Pull-Ups / Lat Pulldown</p>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">3 sets × 10 reps &nbsp;·&nbsp; Back, Biceps</p>
+              </div>
+              <span class="badge badge-success">Upper</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border)">
+              <div style="width:42px;height:42px;border-radius:10px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;font-weight:800;color:#3b82f6">5</div>
+              <div style="flex:1">
+                <p style="font-size:0.9rem;font-weight:600;margin:0 0 0.2rem">Core Circuit</p>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">3 rounds &nbsp;·&nbsp; Plank, Dead Bug, Pallof Press</p>
+              </div>
+              <span class="badge badge-info">Core</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- What to Bring -->
+        <div class="card p-5">
+          <h3 class="section-title">What to Bring</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div style="padding:0.875rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border);text-align:center">
+              <i data-feather="droplet" style="width:20px;height:20px;color:#3b82f6;margin-bottom:0.5rem"></i>
+              <p style="font-size:0.8rem;font-weight:600;margin:0">Water Bottle</p>
+            </div>
+            <div style="padding:0.875rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border);text-align:center">
+              <i data-feather="wind" style="width:20px;height:20px;color:var(--accent);margin-bottom:0.5rem"></i>
+              <p style="font-size:0.8rem;font-weight:600;margin:0">Towel</p>
+            </div>
+            <div style="padding:0.875rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border);text-align:center">
+              <i data-feather="music" style="width:20px;height:20px;color:var(--success);margin-bottom:0.5rem"></i>
+              <p style="font-size:0.8rem;font-weight:600;margin:0">Earbuds</p>
+            </div>
+            <div style="padding:0.875rem;background:var(--bg-secondary);border-radius:10px;border:1px solid var(--border);text-align:center">
+              <i data-feather="activity" style="width:20px;height:20px;color:#a855f7;margin-bottom:0.5rem"></i>
+              <p style="font-size:0.8rem;font-weight:600;margin:0">Gym Gloves</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Sidebar -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- Book Now Card -->
+        <div class="card p-5">
+          <h3 class="section-title">Book This Class</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.25rem">
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-secondary)">Duration</span>
+              <span style="font-weight:600">60 minutes</span>
+            </div>
+            <div style="height:1px;background:var(--border)"></div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-secondary)">Difficulty</span>
+              <span class="badge badge-accent">All Levels</span>
+            </div>
+            <div style="height:1px;background:var(--border)"></div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-secondary)">Trainer</span>
+              <span style="font-weight:600">John Smith</span>
+            </div>
+            <div style="height:1px;background:var(--border)"></div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+              <span style="color:var(--text-secondary)">Spots Left</span>
+              <span style="font-weight:600;color:var(--success)">7 / 15</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1rem">
+            <label style="display:block;margin-bottom:0.4rem;font-size:0.8rem;color:var(--text-secondary)">Select Time</label>
+            <select id="class-time" style="width:100%;padding:0.625rem 0.875rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:inherit;font-size:0.875rem;cursor:pointer">
+              <option>7:00 AM – 8:00 AM</option>
+              <option>10:00 AM – 11:00 AM</option>
+              <option>12:00 PM – 1:00 PM</option>
+              <option>5:30 PM – 6:30 PM</option>
+              <option>7:00 PM – 8:00 PM</option>
+            </select>
+          </div>
+
+          <button onclick="bookClass('Strength Training')" class="btn-primary" style="width:100%;padding:0.75rem;border-radius:10px;justify-content:center;font-size:0.9rem;font-weight:600">
+            <i data-feather="calendar" style="width:16px;height:16px"></i> Book Session
+          </button>
+          <p style="font-size:0.72rem;color:var(--text-secondary);text-align:center;margin:0.75rem 0 0">Free cancellation up to 2 hours before class</p>
+        </div>
+
+        <!-- Trainer Card -->
+        <div class="card" style="overflow:hidden">
+          <div style="overflow:hidden;height:140px">
+            <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&q=80" alt="John Smith" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div style="padding:1rem">
+            <h4 style="font-size:0.9rem;font-weight:700;margin:0 0 0.25rem">John Smith</h4>
+            <p style="font-size:0.78rem;color:var(--text-secondary);margin:0 0 0.5rem">Strength &amp; Conditioning Coach</p>
+            <div style="display:flex;gap:0.35rem;align-items:center;font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.625rem">
+              <i data-feather="star" style="width:13px;height:13px;color:var(--accent)"></i>
+              <span style="font-weight:600;color:var(--text-primary)">4.9</span> (127 reviews) &nbsp;·&nbsp; 8 yrs exp.
+            </div>
+            <a href="trainers.html" class="btn-outline" style="width:100%;padding:0.5rem;border-radius:8px;justify-content:center;font-size:0.8rem;text-decoration:none">
+              View Profile
+            </a>
+          </div>
+        </div>
+
+        <!-- Next Sessions -->
+        <div class="card p-5">
+          <h3 class="section-title">Upcoming Sessions</h3>
+          <div style="display:flex;flex-direction:column;gap:0.625rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.625rem 0.875rem;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border)">
+              <div>
+                <p style="font-size:0.82rem;font-weight:600;margin:0">Mon, Mar 3</p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">7:00 AM</p>
+              </div>
+              <span class="badge badge-success">7 spots</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.625rem 0.875rem;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border)">
+              <div>
+                <p style="font-size:0.82rem;font-weight:600;margin:0">Wed, Mar 5</p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">5:30 PM</p>
+              </div>
+              <span class="badge badge-accent">3 spots</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.625rem 0.875rem;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border)">
+              <div>
+                <p style="font-size:0.82rem;font-weight:600;margin:0">Fri, Mar 7</p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">12:00 PM</p>
+              </div>
+              <span class="badge badge-success">12 spots</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer"><p style="margin:0">&copy; 2025 FLEX GYM. Built for Champions.</p></footer>
+</main>
+</div>
+<div id="toast-container"></div>
+<div id="chatbot-widget">
+  <div id="chatbot-panel" class="hidden">
+    <div class="chat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-feather="cpu" style="width:15px;height:15px;color:var(--accent)"></i></div>
+      <div><p style="font-size:0.875rem;font-weight:600;margin:0;color:var(--text-primary)">Virtual Trainer</p><p style="font-size:0.7rem;color:#22c55e;margin:0">&#9679; Online</p></div>
+    </div>
+    <div class="chat-messages" id="chatbot-messages"></div>
+    <div class="chat-input-area">
+      <input id="chatbot-input" type="text" placeholder="Ask about strength training..." onkeypress="if(event.key==='Enter')sendChatbotMessage()">
+      <button class="chat-send-btn" onclick="sendChatbotMessage()"><i data-feather="send" style="width:15px;height:15px"></i></button>
+    </div>
+  </div>
+  <button id="chatbot-toggle-btn" onclick="toggleChatbot()"><i data-feather="message-circle" style="width:22px;height:22px"></i></button>
+</div>
+<script src="scripts.js"></script>
+<script>feather.replace();</script>
 </body>
 </html>

@@ -1,160 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLEX GYM - Workout Plan</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FLEX GYM - Workout Plan">
+  <title>FLEX GYM - Workout Plan</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body class="flex h-screen bg-image dark-mode gradient-bg">
-    <div class="flex h-screen w-full bg-black bg-opacity-75">
-        <!-- Sidebar -->
-        <aside class="bg-industrial w-64 h-full flex flex-col">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold flex items-center">
-                    <img src="assets/images/gym-logo.png" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
-                    FLEX GYM
-                </h1>
-            </div>
-            <nav class="flex-1 overflow-y-auto">
-                <a href="index.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="home" class="mr-3"></i> Dashboard
-                </a>
-                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3 active">
-                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
-                </a>
-                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="coffee" class="mr-3"></i> Nutrition
-                </a>
-                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
-                </a>
-                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="users" class="mr-3"></i> Classes
-                </a>
-                <a href="community.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="message-square" class="mr-3"></i> Community
-                </a>
-            </nav>
-            <div class="p-4">
-                <button id="theme-toggle" class="btn-primary px-4 py-2 rounded-full flex items-center neon-glow">
-                    <i data-feather="moon" class="mr-2"></i> Toggle Theme
-                </button>
-            </div>
-        </aside>
+<body class="dark-mode">
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div style="display:flex;height:100vh;overflow:hidden;background:var(--bg-primary)">
 
-        <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto">
-            <header class="bg-industrial p-4 flex justify-between items-center">
-                <h2 class="text-2xl font-semibold">Workout Plan</h2>
-                <a href="index.html" class="btn-primary px-4 py-2 rounded-full text-sm neon-glow">Back to Dashboard</a>
-            </header>
-
-            <div class="p-6">
-                <div class="mb-8">
-                    <h3 class="text-2xl font-bold mb-4">Full Body Blast</h3>
-                    <video controls class="w-full h-64 rounded-lg mb-4 neon-glow">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <p class="text-gray-400 mb-4">A high-intensity workout targeting all major muscle groups.</p>
-                </div>
-
-                <!-- AI Workout Suggestion -->
-                <div class="card p-6 rounded-lg mb-8 neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">AI Workout Suggestion</h4>
-                    <p id="ai-suggestion" class="text-gray-400"></p>
-                </div>
-
-                <!-- 3D Flip Card for Details -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div class="card flip-card neon-glow">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front p-6">
-                                <h4 class="text-xl font-semibold mb-4">Workout Details</h4>
-                                <p class="text-gray-400">Click to flip</p>
-                            </div>
-                            <div class="flip-card-back p-6">
-                                <ul class="space-y-2">
-                                    <li class="flex items-center"><i data-feather="clock" class="mr-2 text-accent"></i> Duration: 60 minutes</li>
-                                    <li class="flex items-center"><i data-feather="zap" class="mr-2 text-accent"></i> Intensity: High</li>
-                                    <li class="flex items-center"><i data-feather="target" class="mr-2 text-accent"></i> Target: Full Body</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flip-card neon-glow">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front p-6">
-                                <h4 class="text-xl font-semibold mb-4">Equipment Needed</h4>
-                                <p class="text-gray-400">Click to flip</p>
-                            </div>
-                            <div class="flip-card-back p-6">
-                                <ul class="space-y-2">
-                                    <li class="flex items-center"><i data-feather="check" class="mr-2 text-accent"></i> Dumbbells</li>
-                                    <li class="flex items-center"><i data-feather="check" class="mr-2 text-accent"></i> Resistance Bands</li>
-                                    <li class="flex items-center"><i data-feather="check" class="mr-2 text-accent"></i> Exercise Mat</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gym Equipment Booking -->
-                <div class="card p-6 rounded-lg mb-8 neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Equipment Booking</h4>
-                    <div id="equipment-booking" class="space-y-4"></div>
-                </div>
-
-                <!-- Real-Time Workout Tracking -->
-                <div class="mt-8 card p-6 rounded-lg neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Live Workout Tracker</h4>
-                    <p class="text-lg mb-2">Reps: <span id="rep-count">0</span></p>
-                    <p class="text-lg mb-4">Est. Calories Burned: <span id="calorie-burn">0</span></p>
-                    <button class="btn-primary px-4 py-2 rounded-full mr-2 neon-glow" onclick="addRep()">Add Rep</button>
-                    <button class="btn-primary px-4 py-2 rounded-full neon-glow" onclick="resetTracker()">Reset</button>
-                </div>
-
-                <!-- Workout Intensity Analyzer -->
-                <div class="mt-8 card p-6 rounded-lg neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Intensity Analyzer</h4>
-                    <p id="intensity-feedback" class="text-gray-400">Start your workout to analyze intensity.</p>
-                </div>
-
-                <!-- Workout Timer -->
-                <div class="mt-8 card p-6 rounded-lg neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Workout Timer</h4>
-                    <p class="text-3xl font-bold mb-4" id="timer-display">00:00</p>
-                    <button class="btn-primary px-6 py-3 rounded-full mr-2 neon-glow" onclick="startTimer(3600)">Start (60 min)</button>
-                    <button class="btn-primary px-6 py-3 rounded-full neon-glow" onclick="stopTimer()">Stop</button>
-                </div>
-
-                <!-- Music Player -->
-                <div class="mt-8 card p-6 rounded-lg neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Workout Beats</h4>
-                    <audio id="music-player" controls class="w-full">
-                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-                        Your browser does not support the audio tag.
-                    </audio>
-                </div>
-
-                <!-- Workout Actions -->
-                <div class="mt-8">
-                    <button class="btn-primary px-6 py-3 rounded-full mr-2 animate-bounce neon-glow" onclick="completeWorkout()">Complete Workout</button>
-                </div>
-
-                <!-- Workout Log History -->
-                <div class="mt-8 card p-6 rounded-lg neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Workout History</h4>
-                    <div id="workout-history" class="space-y-2"></div>
-                </div>
-            </div>
-        </main>
+<aside class="bg-industrial flex flex-col" id="sidebar" style="width:256px;flex-shrink:0;height:100vh;position:relative;z-index:10">
+  <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+    <span class="logo-text">FLEX GYM</span>
+    <button id="sidebar-close-btn" onclick="closeSidebar()" style="display:none;background:none;border:none;cursor:pointer;color:var(--text-secondary);padding:0.25rem;align-items:center;justify-content:center">
+      <i data-feather="x" style="width:18px;height:18px"></i>
+    </button>
+  </div>
+  <nav style="flex:1;overflow-y:auto;padding:0.5rem 0">
+    <a href="index.html" class="sidebar-link"><i data-feather="home" style="width:18px;height:18px;flex-shrink:0"></i><span>Dashboard</span></a>
+    <a href="workout-plan.html" class="sidebar-link active"><i data-feather="zap" style="width:18px;height:18px;flex-shrink:0"></i><span>Workout Plan</span></a>
+    <a href="nutrition.html" class="sidebar-link"><i data-feather="target" style="width:18px;height:18px;flex-shrink:0"></i><span>Nutrition</span></a>
+    <a href="progress-tracker.html" class="sidebar-link"><i data-feather="trending-up" style="width:18px;height:18px;flex-shrink:0"></i><span>Progress</span></a>
+    <a href="classes.html" class="sidebar-link"><i data-feather="users" style="width:18px;height:18px;flex-shrink:0"></i><span>Classes</span></a>
+    <a href="community.html" class="sidebar-link"><i data-feather="message-square" style="width:18px;height:18px;flex-shrink:0"></i><span>Community</span></a>
+    <div style="height:1px;background:var(--border);margin:0.5rem 1rem"></div>
+    <a href="trainers.html" class="sidebar-link"><i data-feather="user" style="width:18px;height:18px;flex-shrink:0"></i><span>Trainers</span></a>
+    <a href="pricing.html" class="sidebar-link"><i data-feather="tag" style="width:18px;height:18px;flex-shrink:0"></i><span>Pricing</span></a>
+    <a href="contact.html" class="sidebar-link"><i data-feather="mail" style="width:18px;height:18px;flex-shrink:0"></i><span>Contact</span></a>
+  </nav>
+  <div style="padding:1rem 1.25rem;border-top:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i data-feather="user" style="width:16px;height:16px;color:var(--accent)"></i>
+      </div>
+      <div style="min-width:0">
+        <p style="font-size:0.875rem;font-weight:600;margin:0">John Doe</p>
+        <p style="font-size:0.75rem;color:var(--text-secondary);margin:0" id="sidebar-plan">Basic Member</p>
+      </div>
     </div>
-    <script src="scripts.js"></script>
-    <script>feather.replace();</script>
+  </div>
+</aside>
+
+<main class="flex-1 overflow-y-auto">
+  <header class="page-header">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <button class="mobile-menu-btn" onclick="openSidebar()">
+        <i data-feather="menu" style="width:20px;height:20px"></i>
+      </button>
+      <div>
+        <h2 style="font-size:1.125rem;font-weight:700;margin:0;line-height:1.2">Workout Plan</h2>
+        <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">Full Body Blast — High Intensity</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <button onclick="toggleTheme()" id="theme-toggle" title="Toggle Theme" style="background:none;border:1px solid var(--border);border-radius:8px;padding:0.5rem;cursor:pointer;color:var(--text-primary);display:flex;align-items:center;justify-content:center;transition:all 0.22s ease">
+        <i data-feather="moon" id="theme-icon" style="width:18px;height:18px"></i>
+      </button>
+    </div>
+  </header>
+
+  <div style="padding:1.5rem">
+
+    <!-- Hero Banner -->
+    <div class="card" style="overflow:hidden;margin-bottom:1.5rem">
+      <div style="position:relative;background:linear-gradient(135deg,rgba(11,11,15,0.88),rgba(245,158,11,0.06)),url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1000&q=80') center/cover;padding:2.5rem 2rem">
+        <span class="badge badge-danger" style="margin-bottom:0.75rem;display:inline-flex">High Intensity</span>
+        <h2 style="font-size:1.75rem;font-weight:800;margin:0 0 0.5rem;letter-spacing:-0.02em">Full Body Blast</h2>
+        <p style="color:var(--text-secondary);margin:0 0 1.25rem;max-width:480px">A high-intensity workout targeting all major muscle groups. Burn fat, build strength, and push your limits.</p>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
+          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem"><i data-feather="clock" style="width:16px;height:16px;color:var(--accent)"></i> 60 min</span>
+          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem"><i data-feather="zap" style="width:16px;height:16px;color:var(--accent)"></i> ~500 cal</span>
+          <span style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem"><i data-feather="target" style="width:16px;height:16px;color:var(--accent)"></i> Full Body</span>
+        </div>
+      </div>
+      <div style="padding:1.25rem;border-top:1px solid var(--border)">
+        <p style="font-size:0.78rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin:0 0 0.75rem">Workout Preview</p>
+        <video controls style="width:100%;border-radius:10px;max-height:260px;background:#000;display:block">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Left: Info + Equipment + History -->
+      <div class="lg:col-span-2" style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- AI Suggestion -->
+        <div class="card p-5">
+          <h3 class="section-title">AI Workout Suggestion</h3>
+          <div style="display:flex;gap:0.875rem;align-items:flex-start">
+            <div class="icon-circle" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);flex-shrink:0">
+              <i data-feather="cpu" style="width:18px;height:18px;color:var(--accent)"></i>
+            </div>
+            <p id="ai-suggestion" style="color:var(--text-secondary);font-size:0.9rem;margin:0;line-height:1.6">Analyzing your progress data...</p>
+          </div>
+        </div>
+
+        <!-- Flip Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flip-card" style="cursor:pointer">
+            <div class="flip-card-inner">
+              <div class="flip-card-front" style="background:var(--bg-card);border:1px solid var(--border)">
+                <div class="icon-circle" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);margin-bottom:0.875rem">
+                  <i data-feather="info" style="width:18px;height:18px;color:var(--accent)"></i>
+                </div>
+                <h4 style="font-size:1rem;font-weight:700;margin:0 0 0.25rem">Workout Details</h4>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">Hover to reveal</p>
+              </div>
+              <div class="flip-card-back">
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.625rem;width:100%">
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="clock" style="width:15px;height:15px;color:var(--accent);flex-shrink:0"></i>Duration: 60 minutes</li>
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="zap" style="width:15px;height:15px;color:var(--accent);flex-shrink:0"></i>Intensity: High</li>
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="target" style="width:15px;height:15px;color:var(--accent);flex-shrink:0"></i>Target: Full Body</li>
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="flame" style="width:15px;height:15px;color:var(--accent);flex-shrink:0"></i>~500 kcal burn</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" style="cursor:pointer">
+            <div class="flip-card-inner">
+              <div class="flip-card-front" style="background:var(--bg-card);border:1px solid var(--border)">
+                <div class="icon-circle" style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);margin-bottom:0.875rem">
+                  <i data-feather="package" style="width:18px;height:18px;color:#3b82f6"></i>
+                </div>
+                <h4 style="font-size:1rem;font-weight:700;margin:0 0 0.25rem">Equipment Needed</h4>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin:0">Hover to reveal</p>
+              </div>
+              <div class="flip-card-back">
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.625rem;width:100%">
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="check-circle" style="width:15px;height:15px;color:var(--success);flex-shrink:0"></i>Dumbbells (5–50 lbs)</li>
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="check-circle" style="width:15px;height:15px;color:var(--success);flex-shrink:0"></i>Resistance Bands</li>
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="check-circle" style="width:15px;height:15px;color:var(--success);flex-shrink:0"></i>Exercise Mat</li>
+                  <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.85rem"><i data-feather="check-circle" style="width:15px;height:15px;color:var(--success);flex-shrink:0"></i>Pull-up Bar</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Equipment Booking -->
+        <div class="card p-5">
+          <h3 class="section-title">Reserve Equipment</h3>
+          <div id="equipment-booking"></div>
+        </div>
+
+        <!-- Workout History -->
+        <div class="card p-5">
+          <h3 class="section-title">Workout History</h3>
+          <div id="workout-history"></div>
+        </div>
+      </div>
+
+      <!-- Right: Tracker + Timer + Music + Complete -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- Live Tracker -->
+        <div class="card p-5 neon-glow">
+          <h3 class="section-title">Live Tracker</h3>
+          <div class="grid grid-cols-2 gap-3" style="margin-bottom:1.25rem">
+            <div style="text-align:center;padding:1rem;background:rgba(245,158,11,0.06);border-radius:10px;border:1px solid rgba(245,158,11,0.12)">
+              <p style="font-size:2rem;font-weight:800;color:var(--accent);margin:0;line-height:1" id="rep-count">0</p>
+              <p style="font-size:0.75rem;color:var(--text-secondary);margin:0.25rem 0 0">Reps</p>
+            </div>
+            <div style="text-align:center;padding:1rem;background:rgba(34,197,94,0.06);border-radius:10px;border:1px solid rgba(34,197,94,0.12)">
+              <p style="font-size:2rem;font-weight:800;color:var(--success);margin:0;line-height:1" id="calorie-burn">0</p>
+              <p style="font-size:0.75rem;color:var(--text-secondary);margin:0.25rem 0 0">Calories</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:0.625rem;margin-bottom:1rem">
+            <button class="btn-primary" style="border-radius:8px;flex:1;font-size:0.85rem;padding:0.55rem" onclick="addRep()">+ Rep</button>
+            <button class="btn-outline" style="flex:1;font-size:0.85rem;padding:0.55rem" onclick="resetTracker()">Reset</button>
+          </div>
+          <div style="padding:0.75rem;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid var(--border)">
+            <p style="font-size:0.7rem;color:var(--text-secondary);margin:0 0 0.25rem;text-transform:uppercase;letter-spacing:0.05em">Intensity</p>
+            <p id="intensity-feedback" style="font-size:0.82rem;margin:0;font-weight:600;color:var(--text-primary)">Start the timer to analyze.</p>
+          </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="card p-5">
+          <h3 class="section-title">Workout Timer</h3>
+          <div style="text-align:center;padding:1rem 0 1.25rem">
+            <div id="timer-display">60:00</div>
+          </div>
+          <div style="display:flex;gap:0.625rem">
+            <button class="btn-primary" style="border-radius:8px;flex:1;font-size:0.85rem;padding:0.6rem" onclick="startTimer(3600)">
+              <i data-feather="play" style="width:15px;height:15px"></i> Start
+            </button>
+            <button class="btn-outline" style="flex:1;font-size:0.85rem;padding:0.6rem" onclick="stopTimer()">
+              <i data-feather="square" style="width:15px;height:15px"></i> Stop
+            </button>
+          </div>
+        </div>
+
+        <!-- Music -->
+        <div class="card p-5">
+          <h3 class="section-title">Workout Beats</h3>
+          <audio controls style="width:100%;border-radius:8px;margin-bottom:0.5rem">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+          </audio>
+          <p style="font-size:0.75rem;color:var(--text-secondary);margin:0">&#127925; SoundHelix Workout Mix Vol.1</p>
+        </div>
+
+        <!-- Complete -->
+        <button class="btn-primary" style="border-radius:12px;padding:1rem;font-size:0.95rem;font-weight:800;width:100%;justify-content:center;gap:0.5rem" onclick="completeWorkout()">
+          <i data-feather="check-circle" style="width:20px;height:20px"></i>
+          Complete Workout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <p style="margin:0">&copy; 2025 FLEX GYM. Built for Champions.</p>
+  </footer>
+</main>
+</div>
+
+<div id="toast-container"></div>
+<div id="chatbot-widget">
+  <div id="chatbot-panel" class="hidden">
+    <div class="chat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i data-feather="cpu" style="width:15px;height:15px;color:var(--accent)"></i>
+      </div>
+      <div>
+        <p style="font-size:0.875rem;font-weight:600;margin:0;color:var(--text-primary)">Virtual Trainer</p>
+        <p style="font-size:0.7rem;color:#22c55e;margin:0">&#9679; Online</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatbot-messages"></div>
+    <div class="chat-input-area">
+      <input id="chatbot-input" type="text" placeholder="Ask about workouts..." onkeypress="if(event.key==='Enter')sendChatbotMessage()">
+      <button class="chat-send-btn" onclick="sendChatbotMessage()">
+        <i data-feather="send" style="width:15px;height:15px"></i>
+      </button>
+    </div>
+  </div>
+  <button id="chatbot-toggle-btn" onclick="toggleChatbot()">
+    <i data-feather="message-circle" style="width:22px;height:22px"></i>
+  </button>
+</div>
+<script src="scripts.js"></script>
+<script>feather.replace();</script>
 </body>
 </html>

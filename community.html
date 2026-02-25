@@ -1,79 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLEX GYM - Community</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLEX GYM - Community</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body class="flex h-screen bg-image dark-mode gradient-bg">
-    <div class="flex h-screen w-full bg-black bg-opacity-75">
-        <!-- Sidebar -->
-        <aside class="bg-industrial w-64 h-full flex flex-col">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold flex items-center">
-                    <img src="assets/images/gym-logo.png" alt="FLEX GYM Logo" class="mr-2 w-12 h-12 rounded-lg">
-                    FLEX GYM
-                </h1>
-            </div>
-            <nav class="flex-1 overflow-y-auto">
-                <a href="index.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="home" class="mr-3"></i> Dashboard
-                </a>
-                <a href="workout-plan.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="calendar" class="mr-3"></i> Workout Plan
-                </a>
-                <a href="nutrition.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="coffee" class="mr-3"></i> Nutrition
-                </a>
-                <a href="progress-tracker.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="trending-up" class="mr-3"></i> Progress Tracker
-                </a>
-                <a href="classes.html" class="sidebar-link flex items-center px-4 py-3">
-                    <i data-feather="users" class="mr-3"></i> Classes
-                </a>
-                <a href="community.html" class="sidebar-link flex items-center px-4 py-3 active">
-                    <i data-feather="message-square" class="mr-3"></i> Community
-                </a>
-            </nav>
-            <div class="p-4">
-                <button id="theme-toggle" class="btn-primary px-4 py-2 rounded-full flex items-center neon-glow">
-                    <i data-feather="moon" class="mr-2"></i> Toggle Theme
-                </button>
-            </div>
-        </aside>
+<body class="dark-mode">
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div style="display:flex;height:100vh;overflow:hidden;background:var(--bg-primary)">
 
-        <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto">
-            <header class="bg-industrial p-4 flex justify-between items-center">
-                <h2 class="text-2xl font-semibold">Community</h2>
-                <a href="index.html" class="btn-primary px-4 py-2 rounded-full text-sm neon-glow">Back to Dashboard</a>
-            </header>
-
-            <div class="p-6">
-                <div class="mb-8">
-                    <img src="https://www.glofox.com/wp-content/uploads/2019/03/fitness20community-2.png" alt="Community" class="w-full h-64 object-cover rounded-lg mb-4 neon-glow">
-                    <h3 class="text-2xl font-bold mb-4">Join Our Fitness Community</h3>
-                    <p class="text-gray-400 mb-4">Connect with fellow fitness enthusiasts, share your journey, and stay motivated!</p>
-                </div>
-                <div class="card p-6 rounded-lg neon-glow">
-                    <h4 class="text-xl font-semibold mb-4">Recent Posts</h4>
-                    <div class="space-y-4" id="community-posts"></div>
-                    <form onsubmit="sharePost(event)" class="mt-4">
-                        <div class="mb-4">
-                            <label class="block text-gray-400">Your Post</label>
-                            <textarea id="post-content" class="w-full p-2 rounded bg-gray-700 text-white" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary px-6 py-3 rounded-full animate-pulse neon-glow">Share Your Story</button>
-                    </form>
-                </div>
-            </div>
-        </main>
+<aside class="bg-industrial flex flex-col" id="sidebar" style="width:256px;flex-shrink:0;height:100vh;position:relative;z-index:10">
+  <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+    <span class="logo-text">FLEX GYM</span>
+    <button id="sidebar-close-btn" onclick="closeSidebar()" style="display:none;background:none;border:none;cursor:pointer;color:var(--text-secondary);padding:0.25rem;align-items:center;justify-content:center">
+      <i data-feather="x" style="width:18px;height:18px"></i>
+    </button>
+  </div>
+  <nav style="flex:1;overflow-y:auto;padding:0.5rem 0">
+    <a href="index.html" class="sidebar-link"><i data-feather="home" style="width:18px;height:18px;flex-shrink:0"></i><span>Dashboard</span></a>
+    <a href="workout-plan.html" class="sidebar-link"><i data-feather="zap" style="width:18px;height:18px;flex-shrink:0"></i><span>Workout Plan</span></a>
+    <a href="nutrition.html" class="sidebar-link"><i data-feather="target" style="width:18px;height:18px;flex-shrink:0"></i><span>Nutrition</span></a>
+    <a href="progress-tracker.html" class="sidebar-link"><i data-feather="trending-up" style="width:18px;height:18px;flex-shrink:0"></i><span>Progress</span></a>
+    <a href="classes.html" class="sidebar-link"><i data-feather="users" style="width:18px;height:18px;flex-shrink:0"></i><span>Classes</span></a>
+    <a href="community.html" class="sidebar-link active"><i data-feather="message-square" style="width:18px;height:18px;flex-shrink:0"></i><span>Community</span></a>
+    <div style="height:1px;background:var(--border);margin:0.5rem 1rem"></div>
+    <a href="trainers.html" class="sidebar-link"><i data-feather="user" style="width:18px;height:18px;flex-shrink:0"></i><span>Trainers</span></a>
+    <a href="pricing.html" class="sidebar-link"><i data-feather="tag" style="width:18px;height:18px;flex-shrink:0"></i><span>Pricing</span></a>
+    <a href="contact.html" class="sidebar-link"><i data-feather="mail" style="width:18px;height:18px;flex-shrink:0"></i><span>Contact</span></a>
+  </nav>
+  <div style="padding:1rem 1.25rem;border-top:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i data-feather="user" style="width:16px;height:16px;color:var(--accent)"></i>
+      </div>
+      <div style="min-width:0">
+        <p style="font-size:0.875rem;font-weight:600;margin:0">John Doe</p>
+        <p style="font-size:0.75rem;color:var(--text-secondary);margin:0" id="sidebar-plan">Basic Member</p>
+      </div>
     </div>
-    <script src="scripts.js"></script>
-    <script>feather.replace();</script>
+  </div>
+</aside>
+
+<main class="flex-1 overflow-y-auto">
+  <header class="page-header">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <button class="mobile-menu-btn" onclick="openSidebar()"><i data-feather="menu" style="width:20px;height:20px"></i></button>
+      <div>
+        <h2 style="font-size:1.125rem;font-weight:700;margin:0;line-height:1.2">Community</h2>
+        <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">Connect, motivate, and inspire fellow members</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <button onclick="toggleTheme()" id="theme-toggle" style="background:none;border:1px solid var(--border);border-radius:8px;padding:0.5rem;cursor:pointer;color:var(--text-primary);display:flex;align-items:center;transition:all 0.22s ease">
+        <i data-feather="moon" id="theme-icon" style="width:18px;height:18px"></i>
+      </button>
+    </div>
+  </header>
+
+  <div style="padding:1.5rem">
+
+    <!-- Hero Banner -->
+    <div class="card" style="overflow:hidden;margin-bottom:1.75rem">
+      <div style="background:linear-gradient(135deg,rgba(11,11,15,0.88),rgba(245,158,11,0.08)),url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80') center/cover;padding:2.5rem 2rem">
+        <span class="badge badge-accent" style="margin-bottom:0.75rem;display:inline-flex">Community</span>
+        <h2 style="font-size:1.75rem;font-weight:800;margin:0 0 0.5rem">Join Our Fitness Community</h2>
+        <p style="color:var(--text-secondary);margin:0;max-width:520px">Share your journey, celebrate wins, and keep each other accountable. You're not alone in this.</p>
+      </div>
+    </div>
+
+    <!-- Community Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" style="margin-bottom:1.5rem">
+      <div class="stat-card p-4" style="text-align:center">
+        <p style="font-size:1.75rem;font-weight:800;margin:0;color:var(--accent)">5,284</p>
+        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0.2rem 0 0">Active Members</p>
+      </div>
+      <div class="stat-card p-4" style="text-align:center">
+        <p style="font-size:1.75rem;font-weight:800;margin:0;color:var(--success)">12,490</p>
+        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0.2rem 0 0">Posts Shared</p>
+      </div>
+      <div class="stat-card p-4" style="text-align:center">
+        <p style="font-size:1.75rem;font-weight:800;margin:0;color:#3b82f6">843</p>
+        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0.2rem 0 0">Challenges Won</p>
+      </div>
+      <div class="stat-card p-4" style="text-align:center">
+        <p style="font-size:1.75rem;font-weight:800;margin:0;color:#a855f7">98%</p>
+        <p style="font-size:0.78rem;color:var(--text-secondary);margin:0.2rem 0 0">Would Recommend</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Feed Column -->
+      <div class="lg:col-span-2" style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- Post Composer -->
+        <div class="card p-5">
+          <h3 class="section-title">Share Your Story</h3>
+          <form onsubmit="sharePost(event)">
+            <div style="margin-bottom:1rem">
+              <textarea id="post-content" placeholder="Share a milestone, tip, or motivational message with the community..." rows="3" style="resize:vertical;min-height:80px" required></textarea>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="display:flex;gap:0.5rem">
+                <button type="button" onclick="quickPost('PR')" style="padding:0.35rem 0.75rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:0.75rem;cursor:pointer;transition:all 0.2s">&#127942; PR</button>
+                <button type="button" onclick="quickPost('Tip')" style="padding:0.35rem 0.75rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:0.75rem;cursor:pointer;transition:all 0.2s">&#128161; Tip</button>
+                <button type="button" onclick="quickPost('Win')" style="padding:0.35rem 0.75rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:0.75rem;cursor:pointer;transition:all 0.2s">&#127881; Win</button>
+              </div>
+              <button type="submit" class="btn-primary" style="border-radius:8px;padding:0.55rem 1.25rem;font-size:0.85rem">
+                <i data-feather="send" style="width:14px;height:14px"></i> Post
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Posts Feed -->
+        <div class="card p-5">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+            <h3 class="section-title" style="margin-bottom:0">Recent Posts</h3>
+            <select id="post-filter" onchange="filterPosts(this.value)" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;padding:0.35rem 0.75rem;font-size:0.78rem;color:var(--text-primary);cursor:pointer">
+              <option value="all">All Posts</option>
+              <option value="pr">PRs</option>
+              <option value="tip">Tips</option>
+              <option value="win">Wins</option>
+            </select>
+          </div>
+          <div id="community-posts" style="display:flex;flex-direction:column;gap:1rem"></div>
+        </div>
+      </div>
+
+      <!-- Sidebar Column -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+        <!-- Active Challenges -->
+        <div class="card p-5">
+          <h3 class="section-title">Active Challenges</h3>
+          <div style="display:flex;flex-direction:column;gap:0.875rem">
+            <div style="padding:1rem;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.12);border-radius:10px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
+                <div>
+                  <p style="font-size:0.85rem;font-weight:600;margin:0">30-Day Squat Challenge</p>
+                  <p style="font-size:0.75rem;color:var(--text-secondary);margin:0.15rem 0 0">248 participants</p>
+                </div>
+                <span class="badge badge-accent">Active</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width:65%"></div>
+              </div>
+              <p style="font-size:0.72rem;color:var(--text-secondary);margin:0.4rem 0 0">Day 20 of 30</p>
+            </div>
+            <div style="padding:1rem;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.12);border-radius:10px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
+                <div>
+                  <p style="font-size:0.85rem;font-weight:600;margin:0">10K Steps/Day</p>
+                  <p style="font-size:0.75rem;color:var(--text-secondary);margin:0.15rem 0 0">512 participants</p>
+                </div>
+                <span class="badge badge-success">Active</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden;height:6px">
+                <div style="height:6px;border-radius:999px;background:var(--success);width:80%;transition:width 0.6s ease"></div>
+              </div>
+              <p style="font-size:0.72rem;color:var(--text-secondary);margin:0.4rem 0 0">Day 24 of 30</p>
+            </div>
+            <div style="padding:1rem;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.12);border-radius:10px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
+                <div>
+                  <p style="font-size:0.85rem;font-weight:600;margin:0">Hydration Week</p>
+                  <p style="font-size:0.75rem;color:var(--text-secondary);margin:0.15rem 0 0">189 participants</p>
+                </div>
+                <span class="badge badge-info">3 Days Left</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden;height:6px">
+                <div style="height:6px;border-radius:999px;background:#3b82f6;width:57%;transition:width 0.6s ease"></div>
+              </div>
+              <p style="font-size:0.72rem;color:var(--text-secondary);margin:0.4rem 0 0">Day 4 of 7</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Members -->
+        <div class="card p-5">
+          <h3 class="section-title">Top Members</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem" id="top-members">
+            <div style="display:flex;align-items:center;gap:0.75rem">
+              <span style="font-size:1rem;font-weight:800;color:var(--accent);width:20px">1</span>
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;font-weight:700">A</div>
+              <div style="flex:1;min-width:0">
+                <p style="font-size:0.85rem;font-weight:600;margin:0">Alex Rivera</p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">1,240 pts</p>
+              </div>
+              <i data-feather="award" style="width:16px;height:16px;color:var(--accent)"></i>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem">
+              <span style="font-size:1rem;font-weight:800;color:var(--text-secondary);width:20px">2</span>
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(100,116,139,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;font-weight:700">M</div>
+              <div style="flex:1;min-width:0">
+                <p style="font-size:0.85rem;font-weight:600;margin:0">Maria Chen</p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">980 pts</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem">
+              <span style="font-size:1rem;font-weight:800;color:var(--text-secondary);width:20px">3</span>
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(100,116,139,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;font-weight:700">J</div>
+              <div style="flex:1;min-width:0">
+                <p style="font-size:0.85rem;font-weight:600;margin:0">Jake Torres</p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">850 pts</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem">
+              <span style="font-size:1rem;font-weight:800;color:var(--text-secondary);width:20px">4</span>
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;font-weight:700;color:var(--accent)">J</div>
+              <div style="flex:1;min-width:0">
+                <p style="font-size:0.85rem;font-weight:600;margin:0">John Doe <span style="font-size:0.7rem;color:var(--accent)">(You)</span></p>
+                <p style="font-size:0.72rem;color:var(--text-secondary);margin:0">620 pts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer"><p style="margin:0">&copy; 2025 FLEX GYM. Built for Champions.</p></footer>
+</main>
+</div>
+<div id="toast-container"></div>
+<div id="chatbot-widget">
+  <div id="chatbot-panel" class="hidden">
+    <div class="chat-header">
+      <div style="width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i data-feather="cpu" style="width:15px;height:15px;color:var(--accent)"></i></div>
+      <div><p style="font-size:0.875rem;font-weight:600;margin:0;color:var(--text-primary)">Virtual Trainer</p><p style="font-size:0.7rem;color:#22c55e;margin:0">&#9679; Online</p></div>
+    </div>
+    <div class="chat-messages" id="chatbot-messages"></div>
+    <div class="chat-input-area">
+      <input id="chatbot-input" type="text" placeholder="Ask about community..." onkeypress="if(event.key==='Enter')sendChatbotMessage()">
+      <button class="chat-send-btn" onclick="sendChatbotMessage()"><i data-feather="send" style="width:15px;height:15px"></i></button>
+    </div>
+  </div>
+  <button id="chatbot-toggle-btn" onclick="toggleChatbot()"><i data-feather="message-circle" style="width:22px;height:22px"></i></button>
+</div>
+<script src="scripts.js"></script>
+<script>
+feather.replace();
+function quickPost(type) {
+  const templates = {
+    PR: '&#127942; Just hit a new personal record! So proud of the progress. Keep pushing everyone!',
+    Tip: '&#128161; Tip of the day: Stay consistent. Small daily improvements lead to massive results over time!',
+    Win: '&#127881; Small win today! Finished my workout even when I didn\'t feel like it. Mind over matter!'
+  };
+  document.getElementById('post-content').value = templates[type];
+}
+function filterPosts(value) {
+  // Posts are loaded dynamically by scripts.js; this is a placeholder
+  showToast('Filter: ' + value, 'info');
+}
+</script>
 </body>
 </html>
