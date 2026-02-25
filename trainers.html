@@ -76,7 +76,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
       <!-- Trainer 1 -->
-      <div class="card" style="overflow:hidden">
+      <div class="card" id="trainer-John-Smith" style="overflow:hidden">
         <div style="overflow:hidden;height:220px">
           <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&q=80" alt="John Smith" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease">
         </div>
@@ -108,7 +108,7 @@
       </div>
 
       <!-- Trainer 2 -->
-      <div class="card" style="overflow:hidden">
+      <div class="card" id="trainer-Sarah-Johnson" style="overflow:hidden">
         <div style="overflow:hidden;height:220px">
           <img src="https://images.unsplash.com/photo-1571019614242-4b3532a749a1?w=400&q=80" alt="Sarah Johnson" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease">
         </div>
@@ -140,7 +140,7 @@
       </div>
 
       <!-- Trainer 3 -->
-      <div class="card" style="overflow:hidden">
+      <div class="card" id="trainer-Mike-Torres" style="overflow:hidden">
         <div style="overflow:hidden;height:220px">
           <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80" alt="Mike Torres" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease">
         </div>
@@ -192,6 +192,23 @@
   <button id="chatbot-toggle-btn" onclick="toggleChatbot()"><i data-feather="message-circle" style="width:22px;height:22px"></i></button>
 </div>
 <script src="scripts.js"></script>
-<script>feather.replace();</script>
+<script>
+feather.replace();
+// Highlight trainer card if navigated here with ?book= param
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const bookName = params.get('book');
+    if (bookName) {
+        const name = decodeURIComponent(bookName);
+        const cardId = 'trainer-' + name.replace(/\s+/g, '-');
+        const card = document.getElementById(cardId);
+        if (card) {
+            card.style.border = '1px solid rgba(245,158,11,0.5)';
+            card.style.boxShadow = '0 0 0 3px rgba(245,158,11,0.12)';
+            setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+        }
+    }
+})();
+</script>
 </body>
 </html>
