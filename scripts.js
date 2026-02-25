@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Inject header UI (notification bell + profile button)
     injectHeaderUI();
 
+    // Load saved profile name into sidebar + header button
+    loadUserProfile();
+
     // Inject global modals into body
     injectModals();
 
@@ -486,6 +489,23 @@ function openProfileModal() {
     feather.replace();
 }
 
+// ---- Profile Display (updates sidebar name + header button from localStorage) ----
+function loadUserProfile() {
+    const prof = JSON.parse(localStorage.getItem('userProfile'));
+    if (!prof) return;
+
+    // Update sidebar name — scope search to #sidebar so we don't hit other p tags
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        const nameEl = sidebar.querySelector('p[style*="font-weight:600"]');
+        if (nameEl) nameEl.textContent = prof.name;
+    }
+
+    // Update injected header username button (may not exist yet on first call)
+    const usernameEl = document.getElementById('header-username');
+    if (usernameEl) usernameEl.textContent = prof.name.split(' ')[0];
+}
+
 function saveProfile(event) {
     event.preventDefault();
     const prof = {
@@ -497,12 +517,8 @@ function saveProfile(event) {
     };
     localStorage.setItem('userProfile', JSON.stringify(prof));
 
-    const first = prof.name.split(' ')[0];
-    const usernameEl = document.getElementById('header-username');
-    if (usernameEl) usernameEl.textContent = first;
-
-    const sidebarName = document.querySelector('[style*="font-size:0.875rem;font-weight:600"]');
-    if (sidebarName && sidebarName.tagName === 'P') sidebarName.textContent = prof.name;
+    // Update all profile display elements reliably
+    loadUserProfile();
 
     closeProfileModal();
     showToast('Profile updated successfully!', 'success');
