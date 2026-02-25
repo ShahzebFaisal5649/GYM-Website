@@ -402,8 +402,9 @@ function bookClassDirect(className) {
     stats.calories += 300;
     localStorage.setItem('dashboardStats', JSON.stringify(stats));
 
-    let leaderboard = JSON.parse(localStorage.getItem('classLeaderboard')) || { 'John Doe': 8 };
-    leaderboard['John Doe'] = (leaderboard['John Doe'] || 0) + 1;
+    const me = getCurrentUser();
+    let leaderboard = JSON.parse(localStorage.getItem('classLeaderboard')) || { [me]: 8 };
+    leaderboard[me] = (leaderboard[me] || 0) + 1;
     localStorage.setItem('classLeaderboard', JSON.stringify(leaderboard));
 
     let bookings = JSON.parse(localStorage.getItem('myBookings')) || [];
@@ -466,7 +467,7 @@ function closeTrainerModal() {
 }
 
 // Navigate to trainers.html to book (used from classes page)
-function bookTrainer(name, time) {
+function bookTrainer(name) {
     window.location.href = `trainers.html?book=${encodeURIComponent(name)}`;
 }
 
@@ -490,20 +491,22 @@ function openProfileModal() {
 }
 
 // ---- Profile Display (updates sidebar name + header button from localStorage) ----
-function loadUserProfile() {
+function getCurrentUser() {
     const prof = JSON.parse(localStorage.getItem('userProfile'));
-    if (!prof) return;
+    return (prof && prof.name) ? prof.name : 'John Doe';
+}
 
-    // Update sidebar name — scope search to #sidebar so we don't hit other p tags
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-        const nameEl = sidebar.querySelector('p[style*="font-weight:600"]');
-        if (nameEl) nameEl.textContent = prof.name;
-    }
+function loadUserProfile() {
+    const name = getCurrentUser();
+    const isDefault = name === 'John Doe';
 
-    // Update injected header username button (may not exist yet on first call)
+    // Update sidebar name via dedicated ID (added to all HTML files)
+    const nameEl = document.getElementById('sidebar-user-name');
+    if (nameEl) nameEl.textContent = name;
+
+    // Update injected header username button
     const usernameEl = document.getElementById('header-username');
-    if (usernameEl) usernameEl.textContent = prof.name.split(' ')[0];
+    if (usernameEl) usernameEl.textContent = name.split(' ')[0];
 }
 
 function saveProfile(event) {
@@ -1132,14 +1135,15 @@ function loadTrainerSchedule() {
 function loadClassLeaderboard() {
     const container = document.getElementById('class-leaderboard');
     if (!container) return;
-    const leaderboard = JSON.parse(localStorage.getItem('classLeaderboard')) || { 'John Doe': 8, 'Alex Kim': 15, 'Maria Santos': 12 };
+    const me = getCurrentUser();
+    const leaderboard = JSON.parse(localStorage.getItem('classLeaderboard')) || { [me]: 8, 'Alex Kim': 15, 'Maria Santos': 12 };
     const sorted = Object.entries(leaderboard).sort((a, b) => b[1] - a[1]);
     const medals = ['🥇', '🥈', '🥉'];
     container.innerHTML = sorted.map(([user, count], i) => `
         <div style="display:flex;justify-content:space-between;align-items:center;padding:0.625rem 0;border-bottom:1px solid var(--border)">
             <div style="display:flex;align-items:center;gap:0.625rem">
                 <span style="font-size:1rem;width:24px;text-align:center">${medals[i] || (i + 1)}</span>
-                <p style="font-size:0.875rem;font-weight:${user === 'John Doe' ? '700' : '500'};margin:0;color:${user === 'John Doe' ? 'var(--accent)' : 'inherit'}">${user}</p>
+                <p style="font-size:0.875rem;font-weight:${user === me ? '700' : '500'};margin:0;color:${user === me ? 'var(--accent)' : 'inherit'}">${user}</p>
             </div>
             <span class="badge badge-accent">${count} classes</span>
         </div>
@@ -1154,7 +1158,7 @@ function sharePost(event) {
     let posts = JSON.parse(localStorage.getItem('communityPosts')) || [];
     posts.unshift({
         id: Date.now(),
-        user: 'John Doe',
+        user: getCurrentUser(),
         avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80',
         content,
         likes: 0,
@@ -1176,8 +1180,9 @@ function loadCommunityPosts() {
         container.innerHTML = '<p style="color:var(--text-secondary);font-size:0.875rem;padding:1rem 0">No posts yet. Be the first to share your fitness journey!</p>';
         return;
     }
+    const me = getCurrentUser();
     container.innerHTML = posts.map(post => {
-        const liked = post.likedBy && post.likedBy.includes('John Doe');
+        const liked = post.likedBy && post.likedBy.includes(me);
         const safeContent = post.content.replace(/'/g, "\\'").replace(/"/g, '&quot;');
         return `
         <div style="display:flex;gap:0.875rem;padding:1rem 0;border-bottom:1px solid var(--border)">
@@ -1198,7 +1203,7 @@ function loadCommunityPosts() {
                     <button class="share-btn" onclick="sharePostSocial('${safeContent}','facebook')" title="Share on Facebook">
                         <i data-feather="facebook" style="width:13px;height:13px"></i>
                     </button>
-                    ${post.user === 'John Doe' ? `<button class="delete-btn" onclick="deletePost(${post.id})" title="Delete post"><i data-feather="trash-2" style="width:13px;height:13px"></i></button>` : ''}
+                    ${post.user === me ? `<button class="delete-btn" onclick="deletePost(${post.id})" title="Delete post"><i data-feather="trash-2" style="width:13px;height:13px"></i></button>` : ''}
                 </div>
             </div>
         </div>
@@ -1211,7 +1216,7 @@ function likePost(id) {
     const post = posts.find(p => p.id === id);
     if (!post) return;
     if (!post.likedBy) post.likedBy = [];
-    const userId = 'John Doe';
+    const userId = getCurrentUser();
     if (post.likedBy.includes(userId)) {
         post.likedBy = post.likedBy.filter(u => u !== userId);
         post.likes = Math.max((post.likes || 1) - 1, 0);
